@@ -24,15 +24,12 @@ COPY ot-recorder.default /etc/default/ot-recorder
 
 COPY launcher.sh /usr/local/sbin/launcher.sh
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 COPY recorder-health.sh /usr/local/sbin/recorder-health.sh
 HEALTHCHECK CMD /usr/local/sbin/recorder-health.sh
 
-RUN mkdir -p /var/log/supervisor && \
-	mkdir -p -m 775 /owntracks/recorder/store && \
+RUN mkdir -p -m 775 /owntracks/recorder/store && \
 	chown -R owntracks:owntracks /owntracks && \
 	chmod 755 /usr/local/sbin/launcher.sh /usr/local/sbin/recorder-health.sh
 
 EXPOSE 8083
-CMD ["/usr/local/sbin/launcher.sh"]
+ENTRYPOINT ["/usr/local/sbin/launcher.sh"]

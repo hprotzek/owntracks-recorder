@@ -21,4 +21,6 @@ fi
 # copy ot-recorder defaults back to /etc/default/
 cp /owntracks/etc/default/ot-recorder /etc/default/ot-recorder
 
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+cat /etc/default/ot-recorder
+
+/usr/sbin/ot-recorder --http-host 0.0.0.0 $@
